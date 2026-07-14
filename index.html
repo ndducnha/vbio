@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>VBio — Giải mã sinh học, hiểu quá trình lão hóa của bạn</title>
+<meta name="description" content="VBio: phân tích chỉ số sinh học, ước tính tuổi sinh học và lộ trình cải thiện. Kết quả ước tính, không thay thế tư vấn y tế.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="vbio-mark.png">
+<meta property="og:title" content="VBio — Giải mã sinh học">
+<meta property="og:description" content="Phân tích chỉ số sinh học, ước tính tuổi sinh học và lộ trình cải thiện.">
+<meta property="og:image" content="vbio-lockup.png">
+<meta property="og:type" content="website">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "react-dom.production.min.js"};</script>
+<script src="dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-8e741c71.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-2a9cad87.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-d35d53c8.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-61180120.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-94884c2b.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-0c5925cf.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-6682d34e.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-8e741c71.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-2a9cad87.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-d35d53c8.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-61180120.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-94884c2b.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-0c5925cf.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-6682d34e.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-8e741c71.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-2a9cad87.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-d35d53c8.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-61180120.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-94884c2b.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-0c5925cf.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-6682d34e.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-eba17773.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-8133c7ba.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-55b563be.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-768dbfef.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-89ebccce.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-d542ff9b.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-eba17773.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-8133c7ba.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-55b563be.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-768dbfef.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-89ebccce.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-d542ff9b.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-c9e75ac8.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-a7b91ab4.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f-1f320169.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-c9e75ac8.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-a7b91ab4.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("f-1f320169.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-c9e75ac8.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-a7b91ab4.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f-1f320169.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f-c9e75ac8.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f-a7b91ab4.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f-1f320169.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#EEF3F1;color:#13221E;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#0FA37F;text-decoration:none}
+  a:hover{color:#0C9670}
+  ::selection{background:rgba(15,160,126,.3)}
+  button{font-family:inherit;cursor:pointer}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;background:rgba(18,45,40,.12);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#0FA37F,#0C93A6);border:2px solid #FFFFFF;box-shadow:0 0 0 1px rgba(15,160,126,.5),0 3px 12px rgba(15,160,126,.5);cursor:grab}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#0FA37F;border:2px solid #FFFFFF;cursor:grab}
+  input[type=text],input[type=number],input[type=date],select{font-family:inherit;background:#FFFFFF;border:1px solid rgba(18,45,40,.12);border-radius:10px;padding:11px 13px;color:#13221E;font-size:14px;width:100%}
+  :focus-visible{outline:2px solid #0C9670;outline-offset:2px;border-radius:4px}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes pulseRing{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.7;transform:scale(1.04)}}
+  .fl0{animation:floaty 6s ease-in-out infinite}
+  .fl1{animation:floaty 7s ease-in-out infinite .7s}
+  .fl2{animation:floaty 6.5s ease-in-out infinite 1.3s}
+  .fl3{animation:floaty 7.4s ease-in-out infinite 2s}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.fl0,.fl1,.fl2,.fl3,.spin{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="min-height:100vh;position:relative;overflow-x:hidden;background:radial-gradient(1200px 720px at 80% -8%, rgba(15,160,126,.14), transparent 60%),radial-gradient(1000px 640px at 6% 12%, rgba(110,79,224,.12), transparent 58%),radial-gradient(900px 720px at 60% 108%, rgba(12,147,166,.10), transparent 60%),#EEF3F1;color:#13221E;font-family:'Inter',sans-serif">
+  <canvas ref="{{ bgCanvasRef }}" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div style="position:relative;z-index:1">
+
+  <nav style="position:sticky;top:0;z-index:70;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(255,255,255,.75);border-bottom:1px solid rgba(18,45,40,.08)">
+    <div style="max-width:1220px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="vbio-mark.png" alt="VBio" style="height:32px;width:auto;display:block">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;letter-spacing:-.01em">VBio</span>
+      </div>
+      <div style="display:flex;gap:2px;flex-wrap:wrap;margin-left:8px">
+        <a href="#hero" style="color:#5C716B;font-size:14px;padding:8px 12px;border-radius:8px" style-hover="background:#EEF3F1;color:#13221E">Mô hình</a>
+        <a href="#analyze" style="color:#5C716B;font-size:14px;padding:8px 12px;border-radius:8px" style-hover="background:#EEF3F1;color:#13221E">Phân tích</a>
+        <a href="#results" style="color:#5C716B;font-size:14px;padding:8px 12px;border-radius:8px" style-hover="background:#EEF3F1;color:#13221E">Kết quả</a>
+        <a href="#simulate" style="color:#5C716B;font-size:14px;padding:8px 12px;border-radius:8px" style-hover="background:#EEF3F1;color:#13221E">Mô phỏng</a>
+        <a href="#team" style="color:#5C716B;font-size:14px;padding:8px 12px;border-radius:8px" style-hover="background:#EEF3F1;color:#13221E">Đội ngũ</a>
+      </div>
+      <div style="margin-left:auto">
+        <a href="#analyze" style="display:inline-block;background:linear-gradient(135deg,#0FA37F,#0C93A6);border:none;color:#052018;font-weight:600;font-size:14px;padding:10px 18px;border-radius:10px;box-shadow:0 8px 24px rgba(15,160,126,.3)" style-hover="filter:brightness(1.08)">Bắt đầu phân tích</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" style="position:relative;height:100vh;min-height:660px;overflow:hidden;background:radial-gradient(1000px 700px at 50% 38%,rgba(45,214,178,.16),transparent 62%),radial-gradient(780px 580px at 16% 24%,rgba(118,146,255,.11),transparent 60%),radial-gradient(860px 600px at 86% 74%,rgba(226,196,122,.09),transparent 60%),radial-gradient(1200px 900px at 50% 120%,rgba(58,150,130,.10),transparent 65%),linear-gradient(180deg,#04130F 0%,#050A15 52%,#03060D 100%)">
+    <canvas ref="{{ heroCanvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+
+    <div ref="{{ engineLabelRef }}" style="position:absolute;left:50%;top:calc(50% + 104px);transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .45s;pointer-events:none;z-index:2">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;color:#6FF0D0">VBIO BIOLOGICAL</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;color:#6FF0D0">INTELLIGENCE ENGINE</div>
+    </div>
+
+    <div ref="{{ resultLayerRef }}" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;transition:opacity .45s;pointer-events:none;z-index:2">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:#9FB0C4">TUỔI THỰC</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:600;color:#C9D6E4;line-height:1.15">42</div>
+      <div style="color:#4FE0F0;font-size:17px;margin:1px 0">↓</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:#6FF0D0">TUỔI SINH HỌC</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(52px,9vw,74px);font-weight:600;line-height:1;background:linear-gradient(120deg,#35E6C0,#4FE0F0 55%,#A98BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent"><span data-herobio="">42.0</span></div>
+      <div data-herodiff="" style="opacity:0;transition:opacity .5s;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#35E6C0">CHÊNH LỆCH −7.2 năm · TIỀM NĂNG: Xuất sắc</div>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;top:clamp(72px,11vh,120px);text-align:center;padding:0 24px;z-index:3;pointer-events:none">
+      <img src="vbio-lockup.png" alt="VBio — Decode Your Biology" style="width:clamp(240px,34vw,430px);height:auto;margin:0 auto;display:block;filter:drop-shadow(0 10px 46px rgba(53,230,192,.22))"><div style="margin-top:8px;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(15px,1.9vw,22px);letter-spacing:.01em;color:#C4D2E0;text-shadow:0 2px 20px rgba(0,0,0,.6)">Giải mã sinh học. <span style="background:linear-gradient(120deg,#35E6C0,#4FE0F0 55%,#A98BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Hiểu quá trình lão hóa của bạn.</span></div>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;bottom:clamp(38px,7vh,74px);text-align:center;padding:0 24px;z-index:3">
+      <p style="max-width:620px;margin:0 auto 22px;font-size:clamp(14px,1.5vw,17px);line-height:1.6;color:#B9C6D6;text-shadow:0 2px 22px rgba(0,0,0,.65)">VBio chuyển hóa dữ liệu sức khỏe sinh học thành insight có ý nghĩa bằng mô hình tính toán độc quyền và phân tích hỗ trợ bởi AI — để ước tính tuổi sinh học và mô phỏng lộ trình lão hóa khỏe mạnh hơn.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+        <a href="#analyze" style="display:inline-block;background:linear-gradient(135deg,#35E6C0,#4FE0F0);border:none;color:#04140f;font-weight:600;font-size:15px;padding:14px 28px;border-radius:12px;box-shadow:0 10px 34px rgba(53,230,192,.42)" style-hover="filter:brightness(1.08)">Bắt đầu phân tích</a>
+        <a href="#simulate" style="display:inline-block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.28);color:#EAF6FF;font-weight:500;font-size:15px;padding:14px 28px;border-radius:12px;backdrop-filter:blur(8px)" style-hover="background:rgba(255,255,255,.12)">Khám phá công nghệ</a>
+      </div>
+      <div style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:#5E6E82">↓ CUỘN ĐỂ KHÁM PHÁ</div>
+    </div>
+  </section>
+
+  <!-- ANALYZE INTRO -->
+  <section id="analyze" class="reveal" data-reveal="" style="max-width:1000px;margin:0 auto;padding:44px 24px 10px;text-align:center;scroll-margin-top:74px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#0FA37F;margin-bottom:12px">TÍNH TUỔI SINH HỌC CỦA BẠN</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.015em;margin:0 0 12px">Tải dữ liệu lên. Để lõi xử lý làm phần còn lại.</h2>
+    <p style="color:#5C716B;font-size:16px;max-width:620px;margin:0 auto;line-height:1.6">Tải kết quả xét nghiệm và bổ sung thông tin sức khỏe. VBio chuẩn hóa dữ liệu, đưa vào mô hình độc quyền và tạo báo cáo tuổi sinh học — ngay trên trang này.</p>
+  </section>
+
+  <!-- UPLOAD -->
+  <section class="reveal" data-reveal="" style="max-width:1000px;margin:0 auto;padding:26px 24px">
+    <div ref="{{ dropRef }}" sc-camel-on-click="{{ browse }}" sc-camel-on-drag-over="{{ onDragOver }}" sc-camel-on-drag-leave="{{ onDragLeave }}" sc-camel-on-drop="{{ onDrop }}" style="border:1.5px dashed rgba(18,45,40,.18);border-radius:20px;padding:44px 28px;text-align:center;background:#FFFFFF;transition:border-color .2s,background .2s;cursor:pointer" style-hover="border-color:rgba(15,160,126,.5);background:rgba(15,160,126,.04)">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;margin-bottom:6px">Kéo và thả tài liệu sức khỏe của bạn vào đây</div>
+      <div style="font-size:13px;color:#7E8D92;margin-bottom:20px">PDF · Excel · CSV · Word · ảnh kết quả xét nghiệm · phiếu khám · dữ liệu thiết bị đeo</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button sc-camel-on-click="{{ browse }}" style="background:linear-gradient(135deg,#0FA37F,#0C93A6);border:none;color:#052018;font-weight:600;font-size:14px;padding:11px 20px;border-radius:10px" style-hover="filter:brightness(1.08)">Tải tệp lên</button>
+        <a href="#form" style="background:#F1F5F4;border:1px solid rgba(18,45,40,.14);color:#13221E;font-size:14px;padding:11px 20px;border-radius:10px" style-hover="background:rgba(18,45,40,.06)">Nhập thủ công</a>
+        <button sc-camel-on-click="{{ useDemo }}" style="background:rgba(110,79,224,.14);border:1px solid rgba(110,79,224,.4);color:#6B4EE0;font-size:14px;padding:11px 20px;border-radius:10px" style-hover="background:rgba(110,79,224,.22)">Dùng dữ liệu mẫu</button>
+      </div>
+      <input ref="{{ fileInputRef }}" type="file" multiple="" sc-camel-on-change="{{ onFiles }}" style="display:none">
+    </div>
+    <div ref="{{ fileListRef }}" style="display:flex;flex-direction:column;gap:9px;margin-top:14px"></div>
+    <div ref="{{ fileHintRef }}" style="text-align:center;color:#7E8D92;font-size:13px;margin-top:14px">Chưa có tài liệu — thử <span style="color:#6B4EE0">Dùng dữ liệu mẫu</span> để xem cách hoạt động.</div>
+  </section>
+
+  <!-- FORM -->
+  <section id="form" class="reveal" data-reveal="" style="max-width:1000px;margin:0 auto;padding:26px 24px;scroll-margin-top:74px">
+    <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;padding:28px;background:#FFFFFF">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600">Bổ sung thông tin sức khỏe</div>
+          <div style="font-size:13px;color:#7E8D92;margin-top:3px">Không bắt buộc — càng nhiều dữ liệu, ước tính càng chính xác.</div>
+        </div>
+        <div style="text-align:right;min-width:180px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="color:#5C716B">Độ đầy đủ dữ liệu</span><span ref="{{ complPctRef }}" style="color:#0FA37F;font-family:'JetBrains Mono',monospace">78%</span></div>
+          <div style="height:6px;border-radius:99px;background:rgba(18,45,40,.08);overflow:hidden"><div ref="{{ complBarRef }}" style="height:100%;width:78%;border-radius:99px;background:linear-gradient(90deg,#0FA37F,#0C93A6);transition:width .35s ease"></div></div>
+          <div style="font-size:11.5px;color:#7E8D92;margin-top:6px">Độ tin cậy dự đoán: <span ref="{{ confRef }}" style="color:#0C93A6">Trung bình</span></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px" sc-camel-on-input="{{ onForm }}">
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Ngày sinh</span><input type="date" data-field="" value="1984-05-12"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Giới tính</span><sc-raw-select data-field=""><option>Nữ</option><option selected="">Nam</option></sc-raw-select></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Chiều cao (cm)</span><input type="number" data-field="" value="172"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Cân nặng (kg)</span><input type="number" data-field="" value="68"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Vòng eo (cm)</span><input type="number" data-field="" value="88"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Huyết áp</span><input type="text" data-field="" value="126/82"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Ngủ trung bình (giờ)</span><input type="number" data-field="" value="5.8"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Buổi tập / tuần</span><input type="number" data-field="" value="2"></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Stress level</span><sc-raw-select data-field=""><option>Thấp</option><option selected="">Vừa</option><option>Cao</option></sc-raw-select></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Hút thuốc</span><sc-raw-select data-field=""><option selected="">Không</option><option>Đã bỏ</option><option>Đang hút</option></sc-raw-select></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Rượu bia</span><sc-raw-select data-field=""><option>Không</option><option selected="">Thỉnh thoảng</option><option>Thường xuyên</option></sc-raw-select></label>
+        <label><span style="font-size:12px;color:#5C716B;display:block;margin-bottom:6px">Tiền sử bệnh</span><input type="text" data-field="" placeholder="vd: không"></label>
+      </div>
+    </div>
+
+    <!-- RUN -->
+    <div style="text-align:center;margin-top:26px">
+      <button sc-camel-on-click="{{ runAnalysis }}" style="background:linear-gradient(135deg,#0FA37F,#0C93A6);border:none;color:#052018;font-weight:600;font-size:16px;padding:16px 34px;border-radius:13px;box-shadow:0 12px 34px rgba(15,160,126,.38)" style-hover="filter:brightness(1.08)">Chạy phân tích VBio</button>
+    </div>
+
+    <!-- PROCESSING -->
+    <div ref="{{ procRef }}" style="display:none;margin-top:22px;border:1px solid rgba(15,160,126,.3);border-radius:18px;padding:24px 26px;background:linear-gradient(160deg,rgba(15,160,126,.08),rgba(255,255,255,.6))">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><span class="spin" style="width:15px;height:15px;border-radius:50%;border:2px solid rgba(15,160,126,.3);border-top-color:#0FA37F;animation:spin 1s linear infinite"></span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#0C9670;letter-spacing:.05em">ĐANG CHẠY LÕI VBIO…</span></div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Đọc tài liệu sức khỏe</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Trích xuất chỉ số sinh học</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Chuẩn hóa giá trị xét nghiệm</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> So sánh với khoảng tham chiếu</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Chạy mô hình lão hóa VBio</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Tính tuổi sinh học</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Xác định yếu tố lão hóa</div>
+        <div data-step="" style="opacity:.5;display:flex;align-items:center;gap:10px;font-size:14px;color:#41534D"><span data-check="" style="color:#7E8D92;width:16px">○</span> Tạo kịch bản cải thiện</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" ref="{{ resultsRef }}" class="reveal" data-reveal="" style="max-width:1220px;margin:0 auto;padding:48px 24px;scroll-margin-top:74px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#0FA37F;margin-bottom:12px">KẾT QUẢ CỦA BẠN</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
+      <div style="grid-column:span 2;min-width:220px;border:1px solid rgba(15,160,126,.32);border-radius:20px;padding:26px;background:linear-gradient(150deg,rgba(15,160,126,.13),rgba(255,255,255,.6))">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#0C9670;letter-spacing:.05em">TUỔI SINH HỌC CỦA BẠN</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(56px,9vw,84px);font-weight:600;line-height:.95;background:linear-gradient(120deg,#0FA37F,#0C93A6 60%,#6B4EE0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent"><span data-bioage="">36.8</span> <span style="font-size:26px;color:#5C716B;-webkit-text-fill-color:#5C716B">tuổi</span></div>
+      </div>
+      <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;padding:22px;background:#FFFFFF"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7E8D92">TUỔI THỰC</div><div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:600;line-height:1;color:#5C716B">42</div></div>
+      <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;padding:22px;background:#FFFFFF"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7E8D92">CHÊNH LỆCH</div><div style="font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:600;line-height:1;color:#0FA37F"><span data-diff="">5.2</span></div><div style="font-size:12px;color:#7E8D92;margin-top:2px">năm trẻ hơn</div></div>
+      <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;padding:22px;background:#FFFFFF"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7E8D92">TỐC ĐỘ LÃO HÓA</div><div style="font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:600;line-height:1"><span data-speed="">0.86</span></div><div style="font-size:12px;color:#7E8D92;margin-top:2px">năm SH / năm lịch</div></div>
+      <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;padding:22px;background:#FFFFFF"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7E8D92">ĐIỂM SỨC KHỎE</div><div style="font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:600;line-height:1;color:#0C93A6">82<span style="font-size:16px;color:#7E8D92">/100</span></div><div style="font-size:12px;color:#7E8D92;margin-top:2px">độ tin cậy: Cao</div></div>
+    </div>
+  </section>
+
+  <!-- FACTORS -->
+  <section class="reveal" data-reveal="" style="max-width:1220px;margin:0 auto;padding:20px 24px 40px">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.015em;margin:0 0 22px">Điều gì đang định hình tuổi sinh học</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px">
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px"><span style="width:9px;height:9px;border-radius:50%;background:#0FA37F"></span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#0FA37F">YẾU TỐ TÍCH CỰC</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(18,45,40,.09);border-radius:12px;padding:14px 16px;background:rgba(15,160,126,.05)"><div><div style="font-size:14px;color:#13221E">Đường huyết ổn định</div><div style="font-size:12px;color:#7E8D92">105 mg/dL · trong ngưỡng</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#0FA37F">−0.9 năm</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(18,45,40,.09);border-radius:12px;padding:14px 16px;background:rgba(15,160,126,.05)"><div><div style="font-size:14px;color:#13221E">Chức năng gan tốt</div><div style="font-size:12px;color:#7E8D92">ALT/AST bình thường</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#0FA37F">−0.7 năm</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(18,45,40,.09);border-radius:12px;padding:14px 16px;background:rgba(15,160,126,.05)"><div><div style="font-size:14px;color:#13221E">Vận động đều đặn</div><div style="font-size:12px;color:#7E8D92">tín hiệu tim mạch ổn định</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#0FA37F">−0.6 năm</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(18,45,40,.09);border-radius:12px;padding:14px 16px;background:rgba(15,160,126,.05)"><div><div style="font-size:14px;color:#13221E">Huyết áp ổn định</div><div style="font-size:12px;color:#7E8D92">126/82 mmHg</div></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#0FA37F">−0.5 năm</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px"><span style="width:9px;height:9px;border-radius:50%;background:#DD6238"></span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#DD6238">YẾU TỐ THÚC ĐẨY LÃO HÓA</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="border:1px solid rgba(224,106,67,.22);border-radius:12px;padding:14px 16px;background:rgba(224,106,67,.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:14px;color:#13221E">Vitamin D thấp</div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#DD6238">+0.8 năm</span></div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#5C716B;font-family:'JetBrains Mono',monospace"><span>hiện tại 18 ng/mL</span><span style="color:#7E8D92">ngưỡng 30–50</span><span style="color:#0FA37F">cải thiện: Cao</span></div>
+          </div>
+          <div style="border:1px solid rgba(224,106,67,.22);border-radius:12px;padding:14px 16px;background:rgba(224,106,67,.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:14px;color:#13221E">Viêm cao</div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#DD6238">+0.7 năm</span></div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#5C716B;font-family:'JetBrains Mono',monospace"><span>CRP 3.4 mg/L</span><span style="color:#7E8D92">ngưỡng &lt;1.0</span><span style="color:#0FA37F">cải thiện: Cao</span></div>
+          </div>
+          <div style="border:1px solid rgba(224,106,67,.22);border-radius:12px;padding:14px 16px;background:rgba(224,106,67,.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:14px;color:#13221E">Chất lượng ngủ kém</div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#DD6238">+0.9 năm</span></div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#5C716B;font-family:'JetBrains Mono',monospace"><span>5.8 giờ / đêm</span><span style="color:#7E8D92">mục tiêu 7–8 giờ</span><span style="color:#0FA37F">cải thiện: Cao</span></div>
+          </div>
+          <div style="border:1px solid rgba(224,106,67,.22);border-radius:12px;padding:14px 16px;background:rgba(224,106,67,.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:14px;color:#13221E">Mỡ cơ thể &amp; căng thẳng cao</div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#DD6238">+1.1 năm</span></div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#5C716B;font-family:'JetBrains Mono',monospace"><span>mỡ cơ thể 29%</span><span style="color:#7E8D92">mục tiêu 18–22%</span><span style="color:#0C93A6">cải thiện: Trung bình</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULATION -->
+  <section id="simulate" class="reveal" data-reveal="" style="max-width:1220px;margin:0 auto;padding:40px 24px;scroll-margin-top:74px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#0FA37F;margin-bottom:12px">KHÁM PHÁ TIỀM NĂNG SỨC KHỎE</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.02em;margin:0 0 10px;max-width:760px">Xem cơ thể bạn có thể trở nên thế nào.</h2>
+    <p style="color:#5C716B;font-size:16px;max-width:620px;margin:0 0 30px;line-height:1.6">Kéo các thanh trượt để mô phỏng thay đổi được duy trì. Ước tính và chuỗi gene phản hồi tức thì. Đây là tác động tiềm năng — không phải dự đoán kết quả y khoa.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;align-items:start">
+      <div style="border:1px solid rgba(15,160,126,.28);border-radius:22px;padding:28px;background:linear-gradient(160deg,rgba(15,160,126,.1),rgba(110,79,224,.05),rgba(255,255,255,.6))">
+        <div style="position:relative;height:150px;margin:-6px 0 12px;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 45%,rgba(15,160,126,.1),transparent 70%)"><canvas ref="{{ dnaSimRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas></div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7E8D92">HIỆN TẠI</div><div style="font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:600;line-height:1;color:#5C716B"><span data-curbio="">36.8</span></div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#0C9670">MÔ PHỎNG</div><div style="font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:600;line-height:1;background:linear-gradient(120deg,#0FA37F,#0C93A6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent"><span data-simbio="">36.8</span></div></div>
+        </div>
+        <div style="margin-top:16px;padding:14px 16px;border-radius:12px;background:rgba(20,45,40,.05);border:1px solid rgba(18,45,40,.07);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:13px;color:#5C716B">Cải thiện tiềm năng</span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;color:#0FA37F"><span data-improve="">0.0</span> năm</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px" sc-camel-on-input="{{ onSim }}">
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Vitamin D</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">18 → <span data-out="" style="color:#0FA37F">18</span></span></div><input type="range" data-k="vitd" data-unit=" ng/mL" min="10" max="60" step="1" value="18" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Giấc ngủ</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">5.8 → <span data-out="" style="color:#0FA37F">5.8</span></span></div><input type="range" data-k="sleep" data-unit=" giờ" min="4" max="9" step="0.1" value="5.8" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Mỡ cơ thể</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">29 → <span data-out="" style="color:#0FA37F">29</span></span></div><input type="range" data-k="bodyfat" data-unit="%" min="15" max="40" step="1" value="29" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Buổi tập / tuần</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">2 → <span data-out="" style="color:#0FA37F">2</span></span></div><input type="range" data-k="exercise" data-unit="" min="0" max="7" step="1" value="2" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Đường huyết</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">105 → <span data-out="" style="color:#0FA37F">105</span></span></div><input type="range" data-k="glucose" data-unit=" mg/dL" min="80" max="140" step="1" value="105" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Cholesterol</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">210 → <span data-out="" style="color:#0FA37F">210</span></span></div><input type="range" data-k="chol" data-unit=" mg/dL" min="150" max="260" step="1" value="210" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Căng thẳng</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">6 → <span data-out="" style="color:#0FA37F">6</span></span></div><input type="range" data-k="stress" data-unit="/10" min="1" max="10" step="1" value="6" style="width:100%"></div>
+        <div data-sl="" style="border:1px solid rgba(18,45,40,.09);border-radius:14px;padding:14px 16px;background:#FFFFFF"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px"><span>Cân nặng</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E8D92">68 → <span data-out="" style="color:#0FA37F">68</span></span></div><input type="range" data-k="weight" data-unit=" kg" min="50" max="95" step="1" value="68" style="width:100%"></div>
+        <button sc-camel-on-click="{{ optimize }}" style="grid-column:1/-1;background:rgba(15,160,126,.14);border:1px solid rgba(15,160,126,.4);color:#0C9670;font-size:14px;padding:12px;border-radius:12px" style-hover="background:rgba(15,160,126,.24)">Mô phỏng kịch bản tốt nhất</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="reveal" data-reveal="" style="max-width:1220px;margin:0 auto;padding:40px 24px">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.015em;margin:0 0 22px">Lộ trình cải thiện của bạn</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      <div style="border:1px solid rgba(15,160,126,.25);border-radius:18px;padding:24px;background:linear-gradient(160deg,rgba(15,160,126,.08),rgba(255,255,255,.6))">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#0FA37F;letter-spacing:.06em;margin-bottom:14px">30 NGÀY TỚI</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:14px;color:#41534D">
+          <li style="display:flex;gap:10px"><span style="color:#0FA37F">›</span>Cải thiện chất lượng &amp; thời lượng ngủ</li>
+          <li style="display:flex;gap:10px"><span style="color:#0FA37F">›</span>Tăng vận động / số bước mỗi ngày</li>
+          <li style="display:flex;gap:10px"><span style="color:#0FA37F">›</span>Kiểm tra lại Vitamin D</li>
+          <li style="display:flex;gap:10px"><span style="color:#0FA37F">›</span>Giảm đường tinh luyện</li>
+        </ul>
+      </div>
+      <div style="border:1px solid rgba(12,147,166,.22);border-radius:18px;padding:24px;background:#FFFFFF">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#0C93A6;letter-spacing:.06em;margin-bottom:14px">90 NGÀY TỚI</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:14px;color:#41534D">
+          <li style="display:flex;gap:10px"><span style="color:#0C93A6">›</span>Giảm tỷ lệ mỡ cơ thể</li>
+          <li style="display:flex;gap:10px"><span style="color:#0C93A6">›</span>Cải thiện chỉ số viêm</li>
+          <li style="display:flex;gap:10px"><span style="color:#0C93A6">›</span>Theo dõi đường huyết</li>
+          <li style="display:flex;gap:10px"><span style="color:#0C93A6">›</span>Đánh giá lại tim mạch</li>
+        </ul>
+      </div>
+      <div style="border:1px solid rgba(110,79,224,.22);border-radius:18px;padding:24px;background:#FFFFFF">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B4EE0;letter-spacing:.06em;margin-bottom:14px">180 NGÀY TỚI</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:14px;color:#41534D">
+          <li style="display:flex;gap:10px"><span style="color:#6B4EE0">›</span>Tải kết quả xét nghiệm mới</li>
+          <li style="display:flex;gap:10px"><span style="color:#6B4EE0">›</span>So sánh thay đổi tuổi sinh học</li>
+          <li style="display:flex;gap:10px"><span style="color:#6B4EE0">›</span>Cập nhật mô hình cá nhân</li>
+          <li style="display:flex;gap:10px"><span style="color:#6B4EE0">›</span>Điều chỉnh kế hoạch sức khỏe</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="reveal" data-reveal="" style="max-width:1220px;margin:0 auto;padding:20px 24px 40px">
+    <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;padding:28px;background:#FFFFFF;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600">Lưu báo cáo của bạn</div>
+        <div style="font-size:13px;color:#7E8D92;margin-top:3px">Lưu, so sánh theo thời gian, hoặc chia sẻ với chuyên gia y tế.</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button sc-camel-on-click="{{ toast }}" data-msg="Bản đầy đủ sẽ cho phép tải báo cáo" style="background:linear-gradient(135deg,#0FA37F,#0C93A6);border:none;color:#052018;font-weight:600;font-size:13px;padding:11px 16px;border-radius:10px" style-hover="filter:brightness(1.08)">Tải báo cáo</button>
+        <button sc-camel-on-click="{{ toast }}" data-msg="Đã lưu mô phỏng" style="background:#EEF3F1;border:1px solid rgba(18,45,40,.14);color:#13221E;font-size:13px;padding:11px 16px;border-radius:10px" style-hover="background:rgba(18,45,40,.08)">Lưu mô phỏng</button>
+        <button sc-camel-on-click="{{ toast }}" data-msg="Chưa có kết quả trước — tải lại sau 90 ngày" style="background:#EEF3F1;border:1px solid rgba(18,45,40,.14);color:#13221E;font-size:13px;padding:11px 16px;border-radius:10px" style-hover="background:rgba(18,45,40,.08)">So sánh lần trước</button>
+        <button sc-camel-on-click="{{ toast }}" data-msg="Đã sao chép liên kết chia sẻ" style="background:#EEF3F1;border:1px solid rgba(18,45,40,.14);color:#13221E;font-size:13px;padding:11px 16px;border-radius:10px" style-hover="background:rgba(18,45,40,.08)">Chia sẻ với chuyên gia</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="reveal" data-reveal="" style="max-width:1000px;margin:0 auto;padding:40px 24px;scroll-margin-top:74px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#0FA37F;margin-bottom:12px">XÂY DỰNG BỞI CÁC NHÀ KHOA HỌC</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.015em;margin:0 0 22px">Những người đứng sau VBio.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+      <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;overflow:hidden;background:#FFFFFF;display:flex;flex-direction:column">
+        
+        <div style="padding:20px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px">Dr. Đào Thị Mai Lan</div>
+          <div style="font-size:13px;color:#0FA37F;font-family:'JetBrains Mono',monospace;margin-top:4px">Nhà sáng lập · Sinh học tế bào gốc &amp; gen</div>
+          <p style="font-size:13.5px;color:#5C716B;line-height:1.6;margin:10px 0 0">Tiến sĩ với hơn 12 năm trong sinh học phân tử và hệ gen tại Việt Nam, Hàn Quốc và Pháp. Nghiên cứu viên tại Viện Nghiên cứu Tế bào gốc &amp; Công nghệ Gen Vinmec, công bố trên <em style="font-style:normal;color:#41534D">Nature Genetics</em> và <em style="font-style:normal;color:#41534D">Nature Communications</em>.</p>
+        </div>
+      </div>
+      <div style="border:1px solid rgba(18,45,40,.09);border-radius:20px;overflow:hidden;background:#FFFFFF;display:flex;flex-direction:column">
+        
+        <div style="padding:20px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px">Dr. Nguyễn Đình Đức Nhã <span style="color:#5C716B;font-weight:400">(Tony)</span></div>
+          <div style="font-size:13px;color:#6B4EE0;font-family:'JetBrains Mono',monospace;margin-top:4px">Cố vấn kỹ thuật · AI &amp; khoa học dữ liệu</div>
+          <p style="font-size:13.5px;color:#5C716B;line-height:1.6;margin:10px 0 0">Tiến sĩ An ninh mạng (Đại học Deakin); Giảng viên tại VinUniversity và nhà sáng lập VCyber Lab. Công bố Q1 về AI, học máy và khoa học dữ liệu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid rgba(18,45,40,.08)">
+    <div style="max-width:1220px;margin:0 auto;padding:30px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="vbio-mark.png" alt="VBio" style="height:26px;width:auto;display:block">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600">VBio</span>
+        <span style="font-size:12px;color:#7E8D92;margin-left:8px">© 2026</span>
+      </div>
+      <div style="font-size:12.5px;color:#7E8D92;max-width:560px;text-align:right">VBio cung cấp kết quả ước tính dựa trên dữ liệu bạn cung cấp và mô hình tính toán. Kết quả không thay thế chẩn đoán, tư vấn hoặc điều trị từ chuyên gia y tế.</div>
+    </div>
+  </footer>
+
+  </div>
+
+  <div ref="{{ toastRef }}" style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:90;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border:1px solid rgba(15,160,126,.4);border-radius:12px;padding:12px 20px;font-size:14px;color:#13221E;box-shadow:0 12px 40px rgba(20,45,40,.14)"></div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  dnaMainRef = React.createRef();
+  dnaSimRef = React.createRef();
+  dropRef = React.createRef();
+  fileInputRef = React.createRef();
+  fileListRef = React.createRef();
+  fileHintRef = React.createRef();
+  procRef = React.createRef();
+  resultsRef = React.createRef();
+  complPctRef = React.createRef();
+  complBarRef = React.createRef();
+  confRef = React.createRef();
+  toastRef = React.createRef();
+  heroCanvasRef = React.createRef();
+  bgCanvasRef = React.createRef();
+  engineLabelRef = React.createRef();
+  resultLayerRef = React.createRef();
+  lanCanvasRef = React.createRef();
+  nhaCanvasRef = React.createRef();
+
+  chrono = 42;
+  cur = { vitd: 18, sleep: 5.8, bodyfat: 29, exercise: 2, glucose: 105, chol: 210, stress: 6, weight: 68 };
+  sim = { vitd: 18, sleep: 5.8, bodyfat: 29, exercise: 2, glucose: 105, chol: 210, stress: 6, weight: 68 };
+
+  componentDidMount() {
+    this.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    this.currentBio = this.compute(this.cur);
+    this._bioTarget = this.currentBio;
+    this._bioDisplay = this.currentBio;
+    this._simTarget = this.currentBio;
+    this._simDisplay = this.currentBio;
+    this._phase = 0;
+    this._proc = 0;
+    this.updateCompleteness();
+    this.setupReveal();
+    this.buildHero();
+    this.t0 = performance.now();
+    this.loop();
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this._raf);
+    if (this._obs) this._obs.disconnect();
+    if (this._proct) clearTimeout(this._proct);
+  }
+
+  clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  compute(v) {
+    const cl = (x) => this.clamp(x, 0, 1);
+    const n = {
+      vitd: cl((v.vitd - 15) / 25),
+      sleep: cl(1 - Math.abs(v.sleep - 7.5) / 3.5),
+      bodyfat: cl((30 - v.bodyfat) / 12),
+      exercise: cl(v.exercise / 5),
+      glucose: cl((115 - v.glucose) / 30),
+      chol: cl((230 - v.chol) / 60),
+      stress: cl((8 - v.stress) / 6),
+      weight: cl(1 - Math.abs(v.weight - 62) / 25)
+    };
+    const w = { vitd: 1.4, sleep: 1.6, bodyfat: 1.6, exercise: 1.4, glucose: 1.2, chol: 1.0, stress: 1.2, weight: 0.8 };
+    let s = 0;
+    for (const k in w) s += n[k] * w[k];
+    return this.clamp(40.2 - s, 29, 44);
+  }
+  vitality() { return this.clamp((42 - this._simDisplay) / 12, 0, 1); }
+
+  setupReveal() {
+    const r = this.rootRef.current; if (!r) return;
+    if (this.reduce || !('IntersectionObserver' in window)) {
+      r.querySelectorAll('[data-reveal]').forEach((e) => e.classList.add('in'));
+      return;
+    }
+    this._obs = new IntersectionObserver((ents) => {
+      ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); this._obs.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    r.querySelectorAll('[data-reveal]').forEach((e) => this._obs.observe(e));
+  }
+
+  onSim = (e) => {
+    const t = e.target; if (!t.dataset || !t.dataset.k) return;
+    const k = t.dataset.k, val = +t.value;
+    this.sim[k] = val;
+    const card = t.closest('[data-sl]');
+    if (card) {
+      const out = card.querySelector('[data-out]');
+      if (out) out.textContent = (t.step && +t.step < 1 ? val.toFixed(1) : val) + (t.dataset.unit || '');
+    }
+    this._simTarget = this.compute(this.sim);
+  };
+  optimize = () => {
+    this.sim = { vitd: 42, sleep: 7.5, bodyfat: 22, exercise: 5, glucose: 92, chol: 175, stress: 3, weight: 64 };
+    const r = this.rootRef.current; if (!r) return;
+    r.querySelectorAll('[data-sl]').forEach((card) => {
+      const inp = card.querySelector('input[data-k]'); if (!inp) return;
+      const k = inp.dataset.k; inp.value = this.sim[k];
+      const out = card.querySelector('[data-out]');
+      if (out) out.textContent = (inp.step && +inp.step < 1 ? this.sim[k].toFixed(1) : this.sim[k]) + (inp.dataset.unit || '');
+    });
+    this._simTarget = this.compute(this.sim);
+  };
+
+  updateCompleteness = () => {
+    const r = this.rootRef.current; if (!r) return;
+    const fields = r.querySelectorAll('[data-field]');
+    let filled = 0;
+    fields.forEach((f) => { if (f.value && String(f.value).trim() !== '') filled++; });
+    const pct = fields.length ? Math.round(filled / fields.length * 100) : 0;
+    if (this.complPctRef.current) this.complPctRef.current.textContent = pct + '%';
+    if (this.complBarRef.current) this.complBarRef.current.style.width = pct + '%';
+    if (this.confRef.current) {
+      const c = pct >= 80 ? ['Cao', '#0FA37F'] : pct >= 50 ? ['Trung bình', '#0C93A6'] : ['Thấp', '#DD6238'];
+      this.confRef.current.textContent = c[0]; this.confRef.current.style.color = c[1];
+    }
+  };
+  onForm = () => this.updateCompleteness();
+
+  browse = (e) => { if (e) e.stopPropagation(); if (this.fileInputRef.current) this.fileInputRef.current.click(); };
+  onDragOver = (e) => { e.preventDefault(); if (this.dropRef.current) { this.dropRef.current.style.borderColor = 'rgba(15,160,126,.6)'; this.dropRef.current.style.background = 'rgba(15,160,126,.06)'; } };
+  onDragLeave = () => { if (this.dropRef.current) { this.dropRef.current.style.borderColor = 'rgba(18,45,40,.18)'; this.dropRef.current.style.background = '#FFFFFF'; } };
+  onDrop = (e) => {
+    e.preventDefault(); this.onDragLeave();
+    const files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length) { let i = 0; for (const f of files) { this.addFile(f.name, i * 400); i++; } }
+    else this.addFile('health_document.pdf', 0);
+  };
+  onFiles = (e) => {
+    const files = e.target.files; let i = 0;
+    if (files) for (const f of files) { this.addFile(f.name, i * 400); i++; }
+  };
+  useDemo = (e) => {
+    if (e) e.stopPropagation();
+    if (this.fileListRef.current) this.fileListRef.current.innerHTML = '';
+    ['blood_test_2026.pdf', 'annual_health_check.xlsx', 'smart_watch_data.csv'].forEach((n, i) => this.addFile(n, i * 500));
+  };
+  addFile(name, delayBase) {
+    const list = this.fileListRef.current; if (!list) return;
+    if (this.fileHintRef.current) this.fileHintRef.current.style.display = 'none';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid rgba(18,45,40,.09);border-radius:12px;padding:12px 16px;background:#FFFFFF;animation:fadeup .4s ease both';
+    const nm = document.createElement('div');
+    nm.style.cssText = "font-size:13.5px;color:#13221E;font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap";
+    nm.textContent = name;
+    const st = document.createElement('div');
+    st.style.cssText = "font-size:12px;font-family:'JetBrains Mono',monospace;color:#5A76DE;white-space:nowrap";
+    st.textContent = 'Đã nhận';
+    row.appendChild(nm); row.appendChild(st); list.appendChild(row);
+    const steps = [['Đang đọc dữ liệu', '#5A76DE', 700], ['Đang chuẩn hóa', '#6B4EE0', 1500], ['✓ Sẵn sàng phân tích', '#0FA37F', 2400]];
+    steps.forEach((s) => setTimeout(() => { st.textContent = s[0]; st.style.color = s[1]; }, s[2] + delayBase));
+  }
+
+  runAnalysis = () => {
+    const panel = this.procRef.current; if (!panel) return;
+    panel.style.display = 'block';
+    const items = panel.querySelectorAll('[data-step]');
+    items.forEach((it) => { it.style.opacity = '.5'; const c = it.querySelector('[data-check]'); if (c) { c.textContent = '○'; c.style.color = '#7E8D92'; } });
+    this._proc = 1;
+    this._bioDisplay = this.chrono;
+    let k = 0;
+    const gap = this.reduce ? 120 : 430;
+    const step = () => {
+      if (k < items.length) {
+        const it = items[k]; it.style.opacity = '1';
+        const c = it.querySelector('[data-check]'); if (c) { c.textContent = '✓'; c.style.color = '#0FA37F'; }
+        k++; this._proct = setTimeout(step, gap);
+      } else {
+        this._proct = setTimeout(() => {
+          panel.style.display = 'none'; this._proc = 0;
+          const res = this.resultsRef.current;
+          if (res && window.scrollTo) window.scrollTo({ top: res.getBoundingClientRect().top + window.scrollY - 70, behavior: this.reduce ? 'auto' : 'smooth' });
+        }, 550);
+      }
+    };
+    this._proct = setTimeout(step, 350);
+  };
+
+  toast = (e) => {
+    const msg = e && e.currentTarget && e.currentTarget.dataset.msg;
+    const el = this.toastRef.current; if (!el) return;
+    el.textContent = msg || 'Xong';
+    el.style.opacity = '1'; el.style.transform = 'translateX(-50%) translateY(0)';
+    clearTimeout(this._toastt);
+    this._toastt = setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(-50%) translateY(20px)'; }, 2200);
+  };
+
+  drawDNA(c) {
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const rect = c.getBoundingClientRect();
+    const W = rect.width, H = rect.height;
+    if (W <= 0 || H <= 0) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (c.width !== Math.round(W * dpr) || c.height !== Math.round(H * dpr)) { c.width = W * dpr; c.height = H * dpr; }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const lo = [124, 92, 236], hi = [15, 160, 126], x = this.vitality();
+    const rgb = Math.round(lo[0] + (hi[0] - lo[0]) * x) + ',' + Math.round(lo[1] + (hi[1] - lo[1]) * x) + ',' + Math.round(lo[2] + (hi[2] - lo[2]) * x);
+    // inflow particles
+    if (!c._parts) c._parts = [];
+    const cx = W / 2, cy = H / 2;
+    const rate = this._proc > 0.5 ? 3 : 1;
+    for (let i = 0; i < rate; i++) {
+      if (c._parts.length < 60 && Math.random() < 0.6) {
+        const edge = Math.random(), ex = Math.random() * W, ey = Math.random() * H;
+        c._parts.push({ x: ex, y: ey, life: 1 });
+      }
+    }
+    for (let i = c._parts.length - 1; i >= 0; i--) {
+      const p = c._parts[i];
+      p.x += (cx - p.x) * 0.045; p.y += (cy - p.y) * 0.045; p.life -= 0.012;
+      const dist = Math.hypot(cx - p.x, cy - p.y);
+      if (p.life <= 0 || dist < 8) { c._parts.splice(i, 1); continue; }
+      ctx.globalAlpha = p.life * 0.62; ctx.fillStyle = 'rgb(' + rgb + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 6.29); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    // helix
+    const amp = Math.min(W * 0.26, 90), turns = 2.4, N = Math.max(22, Math.round(H / 9));
+    const pts = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, y = t * H, a = this._phase + t * turns * Math.PI * 2;
+      pts.push({ y: y, x1: cx + amp * Math.sin(a), x2: cx + amp * Math.sin(a + Math.PI), z1: Math.cos(a), z2: Math.cos(a + Math.PI) });
+    }
+    for (const p of pts) {
+      const dmin = (Math.min(p.z1, p.z2) + 1) / 2;
+      ctx.globalAlpha = 0.14 + dmin * 0.34; ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = 1 + dmin * 1.1;
+      ctx.beginPath(); ctx.moveTo(p.x1, p.y); ctx.lineTo(p.x2, p.y); ctx.stroke();
+    }
+    const nodes = [];
+    for (const p of pts) { nodes.push({ x: p.x1, y: p.y, z: p.z1 }); nodes.push({ x: p.x2, y: p.y, z: p.z2 }); }
+    nodes.sort((a, b) => a.z - b.z);
+    for (const n of nodes) {
+      const d = (n.z + 1) / 2, r = 1.4 + d * 3.1;
+      ctx.globalAlpha = 0.3 + d * 0.7; ctx.fillStyle = 'rgb(' + rgb + ')'; ctx.shadowColor = 'rgb(' + rgb + ')'; ctx.shadowBlur = d * (14 + this._proc * 10);
+      ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 6.29); ctx.fill();
+    }
+    ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+    this._phase += this.reduce ? 0 : (0.008 + this._proc * 0.012);
+  }
+
+  loop() {
+    this._bioDisplay += (this._bioTarget - this._bioDisplay) * (this.reduce ? 1 : 0.07);
+    if (Math.abs(this._bioTarget - this._bioDisplay) < 0.01) this._bioDisplay = this._bioTarget;
+    this._simDisplay += (this._simTarget - this._simDisplay) * (this.reduce ? 1 : 0.12);
+    if (Math.abs(this._simTarget - this._simDisplay) < 0.01) this._simDisplay = this._simTarget;
+    const r = this.rootRef.current;
+    if (r) {
+      if (!this._c) this._c = {
+        bio: r.querySelectorAll('[data-bioage]'), diff: r.querySelectorAll('[data-diff]'),
+        speed: r.querySelectorAll('[data-speed]'), simbio: r.querySelectorAll('[data-simbio]'),
+        improve: r.querySelectorAll('[data-improve]')
+      };
+      const bd = this._bioDisplay;
+      this._c.bio.forEach((e) => e.textContent = bd.toFixed(1));
+      this._c.diff.forEach((e) => e.textContent = (this.chrono - bd).toFixed(1));
+      this._c.speed.forEach((e) => e.textContent = (bd / this.chrono).toFixed(2));
+      this._c.simbio.forEach((e) => e.textContent = this._simDisplay.toFixed(1));
+      this._c.improve.forEach((e) => e.textContent = Math.max(0, this.currentBio - this._simDisplay).toFixed(1));
+    }
+    const now = performance.now();
+    this.drawHero(now);
+    this.drawBg(now);
+    this.updateHeroOverlays(now);
+    this.drawDNA(this.dnaSimRef.current);
+    this._raf = requestAnimationFrame(() => this.loop());
+  }
+
+  seg = [2200, 2000, 2200, 2400, 2600, 1600];
+  cyc = 13000;
+  sceneAt(now) {
+    let tt = (now - this.t0) % this.cyc;
+    if (this.reduce) tt = 7000;
+    let sc = 0, acc = 0, lp = 0;
+    for (let s = 0; s < this.seg.length; s++) { if (tt < acc + this.seg[s]) { sc = s; lp = (tt - acc) / this.seg[s]; break; } acc += this.seg[s]; }
+    return { sc, lp };
+  }
+  buildHero() {
+    const N = 520, P = [];
+    const pal = ['52,232,190','52,232,190','52,232,190','96,224,234','96,224,234','236,247,255','236,247,255','228,198,126','150,132,255'];
+    const regs = [[0,-0.34,0.075,0.085,10],[0,-0.20,0.05,0.05,3],[0,-0.04,0.135,0.20,34],[0,0.15,0.115,0.075,10],[-0.055,0.34,0.05,0.17,12],[0.055,0.34,0.05,0.17,12],[-0.17,-0.02,0.038,0.17,8],[0.17,-0.02,0.038,0.17,8]];
+    let tot = 0; regs.forEach(r => tot += r[4]);
+    for (let i = 0; i < N; i++) {
+      let pick = Math.random() * tot, rg = regs[0];
+      for (const rr of regs) { pick -= rr[4]; if (pick <= 0) { rg = rr; break; } }
+      const a = Math.random() * Math.PI * 2, rad = Math.sqrt(Math.random());
+      const hx = rg[0] + rg[2] * rad * Math.cos(a), hy = rg[1] + rg[3] * rad * Math.sin(a);
+      const sa = Math.random() * Math.PI * 2, sr = 0.30 + Math.random() * 0.32;
+      const sx = Math.cos(sa) * sr * 1.4, sy = Math.sin(sa) * sr * 0.9;
+      const th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+      const ux = Math.sin(ph) * Math.cos(th), uy = Math.cos(ph), uz = Math.sin(ph) * Math.sin(th);
+      const ra = Math.random() * Math.PI * 2, rr2 = Math.sqrt(Math.random());
+      const rx = Math.cos(ra) * rr2 * 0.42, ry = Math.sin(ra) * rr2 * 0.16;
+      P.push({ x: null, y: null, hx, hy, sx, sy, ux, uy, uz, u: i / N, strand: i % 2, rx, ry, col: pal[(Math.random() * pal.length) | 0], sz: 1.0 + Math.random() * 1.7, tw: Math.random() * 6.28, tws: 0.6 + Math.random() * 1.7, star: Math.random() < 0.07 });
+    }
+    const lines = [];
+    for (let k = 0; k < 64; k++) lines.push([(Math.random() * N) | 0, (Math.random() * N) | 0]);
+    this.hp = P; this.hlines = lines; this.hN = N;
+    this.markers = ['Vitamin D','HbA1c','Glucose','HDL','LDL','CRP','Ferritin','Insulin','Testosterone','Sleep','Heart Rate','Stress','BMI','Muscle Mass','Inflammation','Protein','Hormone'];
+  }
+  drawHero(now) {
+    const c = this.heroCanvasRef.current; if (!c || !this.hp) return;
+    const rect = c.getBoundingClientRect(), W = rect.width, H = rect.height; if (W <= 0 || H <= 0) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (c.width !== Math.round(W * dpr) || c.height !== Math.round(H * dpr)) { c.width = W * dpr; c.height = H * dpr; }
+    const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2, S = Math.min(W, H), R = S * 0.9;
+    const { sc } = this.sceneAt(now), lp = this.sceneAt(now).lp;
+    const rot = this.reduce ? 0 : now * 0.0006, hrot = this.reduce ? 0 : now * 0.0009;
+    const amp = S * 0.135, hh = S * 0.52, turns = 2.4, P = this.hp, N = this.hN;
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < N; i++) {
+      const p = P[i]; let tx, ty, al = 0.8, sz = p.sz;
+      if (sc === 0 || sc === 5) { tx = cx + p.hx * R; ty = cy + p.hy * R; al = 0.78; }
+      else if (sc === 1) { tx = cx + p.sx * R; ty = cy + p.sy * R; al = 0.7; }
+      else if (sc === 2) { const rx = p.ux * Math.cos(rot) - p.uz * Math.sin(rot), rz = p.ux * Math.sin(rot) + p.uz * Math.cos(rot); tx = cx + rx * S * 0.15; ty = cy + p.uy * S * 0.15; const d = (rz + 1) / 2; al = 0.45 + d * 0.55; sz = p.sz * (0.6 + d * 0.9); }
+      else if (sc === 3) { const ang = p.u * turns * Math.PI * 2 + hrot + p.strand * Math.PI; tx = cx + Math.sin(ang) * amp; ty = cy + (p.u - 0.5) * hh; const d = (Math.cos(ang) + 1) / 2; al = 0.32 + d * 0.62; sz = p.sz * (0.6 + d * 0.8); }
+      else { tx = cx + p.rx * R; ty = cy + p.ry * R; al = 0.16; }
+      if (p.x == null) { p.x = tx; p.y = ty; } else { p.x += (tx - p.x) * 0.12; p.y += (ty - p.y) * 0.12; }
+      const tw = this.reduce ? 0.9 : 0.5 + 0.5 * Math.sin(now * 0.004 * p.tws + p.tw);
+      ctx.globalAlpha = al * (0.5 + tw * 0.5);
+      ctx.fillStyle = 'rgba(' + p.col + ',1)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, sz, 0, 6.29); ctx.fill();
+      if (p.star && tw > 0.9) {
+        const fl = sz * (3 + (tw - 0.9) * 46);
+        ctx.globalAlpha = (tw - 0.9) * 7 * al;
+        ctx.strokeStyle = 'rgba(' + p.col + ',1)'; ctx.lineWidth = 0.75;
+        ctx.beginPath(); ctx.moveTo(p.x - fl, p.y); ctx.lineTo(p.x + fl, p.y); ctx.moveTo(p.x, p.y - fl); ctx.lineTo(p.x, p.y + fl); ctx.stroke();
+      }
+    }
+    if (sc === 0 || sc === 2) {
+      ctx.lineWidth = 0.7;
+      for (const L of this.hlines) { const a = P[L[0]], b = P[L[1]], d = Math.hypot(a.x - b.x, a.y - b.y); if (d < S * 0.5) { ctx.globalAlpha = (sc === 2 ? 0.18 : 0.11) * (1 - d / (S * 0.5)); ctx.strokeStyle = 'rgba(120,224,220,1)'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); } }
+    }
+    if (sc === 3) {
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < N - 1; i += 2) { const a = P[i], b = P[i + 1]; ctx.globalAlpha = 0.12; ctx.strokeStyle = 'rgba(53,230,192,1)'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    }
+    if (sc === 2) { const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, S * 0.22); g.addColorStop(0, 'rgba(53,230,192,0.5)'); g.addColorStop(0.5, 'rgba(79,224,240,0.14)'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, S * 0.22, 0, 6.29); ctx.fill(); }
+    ctx.globalCompositeOperation = 'source-over';
+    if (sc === 1) {
+      const fade = Math.sin(Math.PI * lp); ctx.textAlign = 'center'; ctx.font = "12px 'JetBrains Mono', monospace";
+      const M = this.markers, rr = S * 0.34;
+      for (let m = 0; m < M.length; m++) { const ang = (m / M.length) * Math.PI * 2 + now * 0.0002; const mx = cx + Math.cos(ang) * rr * 1.18, my = cy + Math.sin(ang) * rr * 0.82; ctx.globalAlpha = fade * 0.85; ctx.fillStyle = (m % 5 === 0) ? 'rgba(232,206,150,0.95)' : 'rgba(196,236,242,0.9)'; ctx.fillText(M[m], mx, my); }
+    }
+    const vg = ctx.createRadialGradient(cx, cy, S * 0.16, cx, cy, Math.max(W, H) * 0.72);
+    vg.addColorStop(0, 'rgba(4,12,14,0)'); vg.addColorStop(1, 'rgba(3,6,13,0.5)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+  }
+  drawBg(now) {
+    const c = this.bgCanvasRef.current; if (!c) return;
+    const rect = c.getBoundingClientRect(), W = rect.width, H = rect.height; if (W <= 0 || H <= 0) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (c.width !== Math.round(W * dpr) || c.height !== Math.round(H * dpr)) { c.width = W * dpr; c.height = H * dpr; }
+    const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    if (!this._bg) { this._bg = []; for (let i = 0; i < 70; i++) this._bg.push({ x: Math.random() * W, y: Math.random() * H, r: 0.6 + Math.random() * 1.7, s: 0.1 + Math.random() * 0.28, c: Math.random() < 0.5 ? '15,150,120' : '120,95,220' }); }
+    for (const p of this._bg) { if (!this.reduce) p.y -= p.s; if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; } ctx.globalAlpha = 0.15; ctx.fillStyle = 'rgba(' + p.c + ',1)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.29); ctx.fill(); }
+    ctx.globalAlpha = 1;
+  }
+  updateHeroOverlays(now) {
+    if (!this.hp) return;
+    const { sc, lp } = this.sceneAt(now);
+    const el = this.engineLabelRef.current; if (el) el.style.opacity = (sc === 2) ? '1' : '0';
+    const rl = this.resultLayerRef.current;
+    if (rl) {
+      rl.style.opacity = (sc === 4) ? '1' : '0';
+      if (sc === 4) { const bio = 42 - 7.2 * Math.min(1, lp * 1.6); const b = rl.querySelector('[data-herobio]'); if (b) b.textContent = bio.toFixed(1); const d = rl.querySelector('[data-herodiff]'); if (d) d.style.opacity = lp > 0.5 ? '1' : '0'; }
+    }
+  }
+
+  _sizeCanvas(c) {
+    const rect = c.getBoundingClientRect(), W = rect.width, H = rect.height;
+    if (W <= 0 || H <= 0) return null;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (c.width !== Math.round(W * dpr) || c.height !== Math.round(H * dpr)) { c.width = W * dpr; c.height = H * dpr; }
+    const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    return { ctx, W, H };
+  }
+  drawCells(c, now) {
+    if (!c) return; const s = this._sizeCanvas(c); if (!s) return;
+    const { ctx, W, H } = s; const t = this.reduce ? 0 : now * 0.0006;
+    const n = 6, prev = [];
+    for (let i = 0; i < n; i++) {
+      const fy = i / (n - 1);
+      const x = W * 0.5 + Math.sin(t + fy * 4.2) * W * 0.17;
+      const y = H * (0.13 + fy * 0.74);
+      const r = Math.min(W, H) * 0.115 * (0.85 + 0.15 * Math.sin(t * 2 + i));
+      prev.push({ x, y, r });
+    }
+    // connective membrane links
+    ctx.strokeStyle = 'rgba(18,150,116,0.35)'; 
+    for (let i = 0; i < n - 1; i++) { ctx.lineWidth = Math.min(prev[i].r, prev[i+1].r) * 0.9; ctx.beginPath(); ctx.moveTo(prev[i].x, prev[i].y); ctx.lineTo(prev[i+1].x, prev[i+1].y); ctx.stroke(); }
+    // cells
+    for (let i = 0; i < n; i++) {
+      const p = prev[i];
+      const g = ctx.createRadialGradient(p.x - p.r * 0.3, p.y - p.r * 0.3, p.r * 0.1, p.x, p.y, p.r);
+      g.addColorStop(0, 'rgba(120,240,206,0.95)'); g.addColorStop(0.6, 'rgba(38,200,160,0.85)'); g.addColorStop(1, 'rgba(15,150,116,0.55)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.29); ctx.fill();
+      ctx.strokeStyle = 'rgba(10,110,86,0.55)'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.29); ctx.stroke();
+      // nucleus
+      ctx.fillStyle = 'rgba(9,92,74,0.9)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 0.32, 0, 6.29); ctx.fill();
+      // organelles orbiting
+      for (let k = 0; k < 3; k++) { const a = t * 2.2 + k * 2.1 + i; const ox = p.x + Math.cos(a) * p.r * 0.55, oy = p.y + Math.sin(a) * p.r * 0.55; ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.beginPath(); ctx.arc(ox, oy, p.r * 0.08, 0, 6.29); ctx.fill(); }
+    }
+  }
+  drawAI(c, now) {
+    if (!c) return; const s = this._sizeCanvas(c); if (!s) return;
+    const { ctx, W, H } = s; const t = this.reduce ? 0 : now * 0.001;
+    if (!this._ai) {
+      const cols = [3, 4, 4, 2], nodes = [], edges = [];
+      for (let l = 0; l < cols.length; l++) { for (let j = 0; j < cols[l]; j++) { nodes.push({ l, j, cnt: cols[l], ph: Math.random() * 6.28 }); } }
+      for (let a = 0; a < nodes.length; a++) for (let b = 0; b < nodes.length; b++) { if (nodes[b].l === nodes[a].l + 1) edges.push([a, b, Math.random()]); }
+      this._ai = { nodes, edges };
+    }
+    const pos = (nd) => ({ x: W * (0.14 + nd.l / 3 * 0.72), y: H * ((nd.j + 1) / (nd.cnt + 1)) + Math.sin(t * 1.6 + nd.ph) * H * 0.02 });
+    const N = this._ai.nodes.map(pos);
+    // edges + traveling pulses
+    for (const e of this._ai.edges) {
+      const a = N[e[0]], b = N[e[1]];
+      ctx.strokeStyle = 'rgba(110,90,224,0.22)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      const tt = (t * 0.6 + e[2]) % 1; const px = a.x + (b.x - a.x) * tt, py = a.y + (b.y - a.y) * tt;
+      ctx.fillStyle = 'rgba(90,175,245,0.95)'; ctx.beginPath(); ctx.arc(px, py, 1.8, 0, 6.29); ctx.fill();
+    }
+    // nodes
+    for (let i = 0; i < N.length; i++) {
+      const p = N[i], glow = 0.6 + 0.4 * Math.sin(t * 3 + this._ai.nodes[i].ph), r = Math.min(W, H) * 0.032;
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 2.4);
+      g.addColorStop(0, 'rgba(150,130,255,' + (0.5 * glow) + ')'); g.addColorStop(1, 'rgba(150,130,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, r * 2.4, 0, 6.29); ctx.fill();
+      ctx.fillStyle = 'rgba(107,78,224,0.95)'; ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.29); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.29); ctx.stroke();
+    }
+  }
+
+  renderVals() {
+    return {
+      rootRef: this.rootRef, dnaSimRef: this.dnaSimRef, heroCanvasRef: this.heroCanvasRef, bgCanvasRef: this.bgCanvasRef, engineLabelRef: this.engineLabelRef, resultLayerRef: this.resultLayerRef, lanCanvasRef: this.lanCanvasRef, nhaCanvasRef: this.nhaCanvasRef,
+      dropRef: this.dropRef, fileInputRef: this.fileInputRef, fileListRef: this.fileListRef, fileHintRef: this.fileHintRef,
+      procRef: this.procRef, resultsRef: this.resultsRef,
+      complPctRef: this.complPctRef, complBarRef: this.complBarRef, confRef: this.confRef, toastRef: this.toastRef,
+      onSim: this.onSim, optimize: this.optimize, onForm: this.onForm,
+      browse: this.browse, onDragOver: this.onDragOver, onDragLeave: this.onDragLeave, onDrop: this.onDrop, onFiles: this.onFiles, useDemo: this.useDemo,
+      runAnalysis: this.runAnalysis, toast: this.toast
+    };
+  }
+}
+</script>
+
+
+</body></html>
